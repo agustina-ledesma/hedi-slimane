@@ -1,10 +1,16 @@
 // src/app/fashion/collection/[house]/page.tsx
 import { housesMap } from "@/utils/housesMap";
-import HouseClient from "./HouseClient"; // client component
+import HouseClient from "./HouseClient";
 
-export async function generateMetadata({ params }: { params: { house: string } }) {
-  const houseParam = (await params).house.toLowerCase(); // await aquí
-  const houseData = housesMap.find(h => h.slug.toLowerCase() === houseParam);
+// 🔹 generateMetadata ahora recibe params como Promise
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ house: string }>;
+}) {
+  const { house } = await params; // 👈 se espera la promesa
+  const houseParam = house.toLowerCase();
+  const houseData = housesMap.find((h) => h.slug.toLowerCase() === houseParam);
 
   return {
     title: houseData
@@ -13,8 +19,12 @@ export async function generateMetadata({ params }: { params: { house: string } }
   };
 }
 
-
-export default function HousePage({ params }: { params: { house: string } }) {
-  // params se pasa al client component
-  return <HouseClient params={params} />;
+// 🔹 El componente de página también debe esperar los params
+export default async function HousePage({
+  params,
+}: {
+  params: Promise<{ house: string }>;
+}) {
+  const resolvedParams = await params; // 👈 importante
+  return <HouseClient params={resolvedParams} />;
 }
