@@ -8,7 +8,7 @@ function normalizeName(name: string) {
 export async function GET(
   req: NextRequest,
   context: { params: { house: string } }
-) {
+): Promise<NextResponse> {
   const { house } = context.params;
 
   // Buscar la casa
@@ -29,10 +29,12 @@ export async function GET(
   let filteredCollections: typeof foundHouse.collections = [];
 
   if (collectionName) {
+    // Si hay collectionName, solo traer esa colección
     filteredCollections = foundHouse.collections.filter(
       (c) => c.name && normalizeName(c.name) === normalizeName(collectionName)
     );
   } else {
+    // Si no hay collectionName, aplicar filtros combinables
     filteredCollections = foundHouse.collections.filter((c) => {
       let match = true;
       if (year) match = match && c.year.toString() === year;
