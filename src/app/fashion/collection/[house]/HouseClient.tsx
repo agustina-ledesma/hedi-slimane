@@ -34,10 +34,16 @@ export default function HousePage() {
   const [loading, setLoading] = useState(true);
 
   // Filtros iniciales desde la URL
-  const [seasonFilter, setSeasonFilter] = useState(searchParams.get("season") || "");
-  const [genderFilter, setGenderFilter] = useState(searchParams.get("gender") || "");
+  const [seasonFilter, setSeasonFilter] = useState(
+    searchParams.get("season") || ""
+  );
+  const [genderFilter, setGenderFilter] = useState(
+    searchParams.get("gender") || ""
+  );
   const [yearFilter, setYearFilter] = useState(searchParams.get("year") || "");
-  const [collectionFilter, setCollectionFilter] = useState(searchParams.get("collection") || "");
+  const [collectionFilter, setCollectionFilter] = useState(
+    searchParams.get("collection") || ""
+  );
 
   // 🔹 Limpiar filtros combinables si seleccionás una colección
   useEffect(() => {
@@ -56,7 +62,7 @@ export default function HousePage() {
   }, [seasonFilter, genderFilter, yearFilter]);
 
   // 🔹 Fetch de la casa y actualización de la URL
-  useEffect(() => {
+  /*  useEffect(() => {
     if (!houseParam) return;
 
     const query = new URLSearchParams();
@@ -83,20 +89,65 @@ export default function HousePage() {
     };
 
     fetchHouse();
-  }, [houseParam, seasonFilter, genderFilter, yearFilter, collectionFilter]);
-;
+  }, [houseParam, seasonFilter, genderFilter, yearFilter, collectionFilter]); */
+
+  useEffect(() => {
+    if (!houseParam) return;
+
+    const query = new URLSearchParams();
+    if (seasonFilter) query.set("season", seasonFilter);
+    if (genderFilter) query.set("gender", genderFilter);
+    if (yearFilter) query.set("year", yearFilter);
+    if (collectionFilter) query.set("collection", collectionFilter);
+
+    router.replace(`/fashion/collection/${houseParam}?${query.toString()}`);
+
+    const fetchHouse = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(
+          `/api/houses/${houseParam}?${query.toString()}`
+        );
+        if (!res.ok) throw new Error("House not found");
+        const data = await res.json();
+        setHouse(data);
+      } catch (err) {
+        console.error(err);
+        setHouse(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHouse();
+  }, [
+    router,
+    houseParam,
+    seasonFilter,
+    genderFilter,
+    yearFilter,
+    collectionFilter,
+  ]);
 
   if (loading) return <CollectionsSkeleton />;
 
   if (!house) return <HouseNotFound />;
 
   // 🔹 Generar opciones de selects
-  const seasons = Array.from(new Set(house.allCollections.map(c => c.season)));
-  const genders = Array.from(new Set(house.allCollections.map(c => c.gender)));
-  const years = Array.from(new Set(house.allCollections.map(c => c.year.toString())));
-  const collectionNames = Array.from(new Set(house.allCollections.map(c => c.name).filter(Boolean)));
+  const seasons = Array.from(
+    new Set(house.allCollections.map((c) => c.season))
+  );
+  const genders = Array.from(
+    new Set(house.allCollections.map((c) => c.gender))
+  );
+  const years = Array.from(
+    new Set(house.allCollections.map((c) => c.year.toString()))
+  );
+  const collectionNames = Array.from(
+    new Set(house.allCollections.map((c) => c.name).filter(Boolean))
+  );
 
-  const hasCollectionNames = house.allCollections.some(c => c.name !== null);
+  const hasCollectionNames = house.allCollections.some((c) => c.name !== null);
 
   return (
     <div className="p-4 md:p-6">

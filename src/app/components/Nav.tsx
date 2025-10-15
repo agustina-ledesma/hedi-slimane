@@ -1,13 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import {
-  Navbar,
-  NavbarBrand,
-  NavbarMenuToggle,
-  NavbarMenuItem,
-  NavbarMenu,
-  NavbarContent,
-  NavbarItem,
   Button,
   DropdownItem,
   DropdownTrigger,

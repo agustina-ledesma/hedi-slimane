@@ -7,9 +7,9 @@ function normalizeName(name: string) {
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { house: string } }
+  context: { params: { house: string } }
 ) {
-  const { house } = params;
+  const { house } = context.params;
 
   // Buscar la casa
   const foundHouse = apiData.houses.find(
@@ -21,7 +21,7 @@ export async function GET(
   }
 
   const url = new URL(req.url);
-  const collectionName = url.searchParams.get("collection"); // filtro único por nombre
+  const collectionName = url.searchParams.get("collection");
   const year = url.searchParams.get("year");
   const season = url.searchParams.get("season");
   const gender = url.searchParams.get("gender");
@@ -29,12 +29,10 @@ export async function GET(
   let filteredCollections: typeof foundHouse.collections = [];
 
   if (collectionName) {
-    // Si hay collectionName, solo traer esa colección
     filteredCollections = foundHouse.collections.filter(
       (c) => c.name && normalizeName(c.name) === normalizeName(collectionName)
     );
   } else {
-    // Si no hay collectionName, aplicar filtros combinables
     filteredCollections = foundHouse.collections.filter((c) => {
       let match = true;
       if (year) match = match && c.year.toString() === year;
