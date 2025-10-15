@@ -1,15 +1,15 @@
 import apiData from "@/data/api.json";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 function normalizeName(name: string) {
   return name?.toLowerCase().replace(/\s+/g, "-") || "";
 }
 
 export async function GET(
-  req: NextRequest,
-  context: { params: { house: string } }
-): Promise<NextResponse> {
-  const { house } = context.params;
+  req: Request,
+  { params }: { params: Promise<{ house: string }> }
+): Promise<Response> {
+  const { house } = await params; // ⬅️ Cambio clave en Next 15
 
   // Buscar la casa
   const foundHouse = apiData.houses.find(
