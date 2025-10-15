@@ -36,7 +36,9 @@ export default function Houses() {
             >
               <div className="relative z-20 mt-6 flex flex-col">
                 <div className="relative w-[225px] h-[335px]">
-                  <img
+                  <Image
+                    width={225}
+                    height={335}
                     src={item.cover}
                     alt={item.name}
                     className="w-[225px] h-[335px] object-cover"

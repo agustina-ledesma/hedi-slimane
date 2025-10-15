@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Image from "next/image";
 import Hero from "./ui/hero";
 import Intro from "./ui/intro";
 import Gallery from "./ui/gallery";

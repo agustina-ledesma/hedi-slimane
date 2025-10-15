@@ -10,12 +10,18 @@ import {
   Button,
 } from "@heroui/react";
 
+interface House {
+  slug: string;
+  name: string;
+  // otros campos si los necesitás
+}
+
 type FooterProps = {
   seasons: string[];
   genders: string[];
   years: number[];
   collectionNames: string[];
-  dataMap: Record<string, any>;
+  dataMap: Record<string, House>;
 
   seasonFilter: string;
   genderFilter: string;
@@ -75,7 +81,7 @@ export default function Footer({
                 onChange={handleHouseChange}
                 className="p-2 w-full sm:w-auto flex-1"
               >
-                {Object.values(dataMap).map((house: any) => (
+                {Object.values(dataMap).map((house: House) => (
                   <option key={house.slug} value={house.slug}>
                     {house.name}
                   </option>

@@ -1,14 +1,12 @@
 "use client";
 import React from "react";
-import Image from "next/image";
 import { Shadows_Into_Light } from "next/font/google";
 import {
   DraggableCardBody,
   DraggableCardContainer,
   DraggableIcon,
 } from "@/components/ui/draggable-card";
-import { IconStar, IconHeart } from "@tabler/icons-react";
-import { Skeleton } from "@heroui/react";
+
 
 const shadows = Shadows_Into_Light({
   weight: "400",
@@ -57,10 +55,7 @@ export default function Intro() {
       className: "absolute top-50 left-[65%] rotate-[-10deg]",
     },
   ];
-
-  const [loadedImages, setLoadedImages] = React.useState<boolean[]>(
-    Array(items.length).fill(false)
-  );
+  
 
   return (
     <div className="lg:min-h-screen flex lg:mt-10 flex-col gap-6 lg:my-5 p-6">

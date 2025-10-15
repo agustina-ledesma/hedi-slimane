@@ -1,12 +1,18 @@
 "use client";
 import { useRouter, usePathname } from "next/navigation";
 
+interface House {
+  slug: string;
+  name: string;
+  // otros campos si los necesitás
+}
+
 interface CollectionFiltersProps {
   seasons: string[];
   genders: string[];
   years: number[];
   collectionNames: string[];
-  dataMap: Record<string, any>;
+  dataMap: Record<string, House>;
 
   seasonFilter: string;
   genderFilter: string;
@@ -36,7 +42,6 @@ export default function CollectionFilters({
   hasCollectionNames,
   dataMap,
 }: CollectionFiltersProps) {
-
   const router = useRouter();
   const pathname = usePathname();
 
@@ -59,7 +64,7 @@ export default function CollectionFilters({
             onChange={handleHouseChange}
             className="p-2 w-full sm:w-auto flex-1"
           >
-            {Object.values(dataMap).map((house: any) => (
+            {Object.values(dataMap).map((house: House) => (
               <option key={house.slug} value={house.slug}>
                 {house.name}
               </option>

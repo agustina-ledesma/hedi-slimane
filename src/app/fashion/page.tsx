@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { housesMap } from "@/utils/housesMap";
 
-export default function fashion() {
+export default function Fashion() {
   useEffect(() => {
     document.title = "Hedi Slimane – Fashion Gallery";
   }, []);
@@ -57,7 +57,7 @@ export default function fashion() {
                   <div className="relative w-fit  z-20 flex flex-col">
                     {/* contenedor fijo para la imagen */}
                     <div className="relative min-w-[270px] min-h-[350px] 2xl:w-[400px] 2xl:h-[500px]">
-                      <img
+                      <Image
                         width={300}
                         height={350}
                         src={item.cover}
