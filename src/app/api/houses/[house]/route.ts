@@ -28,18 +28,36 @@ export async function GET(
 
   let filteredCollections: typeof foundHouse.collections = [];
 
-  if (collectionName) {
+  /*  if (collectionName) {
     // Si hay collectionName, solo traer esa colección
     filteredCollections = foundHouse.collections.filter(
       (c) => c.name && normalizeName(c.name) === normalizeName(collectionName)
     );
   } else {
-    // Si no hay collectionName, aplicar filtros combinables
-    filteredCollections = foundHouse.collections.filter((c) => {
+
+   filteredCollections = foundHouse.collections.filter((c) => {
       let match = true;
       if (year) match = match && c.year.toString() === year;
       if (season) match = match && c.season.toLowerCase() === season.toLowerCase();
       if (gender) match = match && c.gender.toLowerCase() === gender.toLowerCase();
+      return match;
+    });
+  }
+ */
+
+  if (collectionName) {
+    filteredCollections = foundHouse.collections.filter((c) => {
+      const name = c.name ?? ""; // si es null, lo tratamos como string vacío
+      return normalizeName(name) === normalizeName(collectionName);
+    });
+  } else {
+    filteredCollections = foundHouse.collections.filter((c) => {
+      let match = true;
+      if (year) match = match && c.year.toString() === year;
+      if (season)
+        match = match && c.season.toLowerCase() === season.toLowerCase();
+      if (gender)
+        match = match && c.gender.toLowerCase() === gender.toLowerCase();
       return match;
     });
   }
