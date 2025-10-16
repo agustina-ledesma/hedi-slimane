@@ -10,7 +10,7 @@ interface House {
 interface CollectionFiltersProps {
   seasons: string[];
   genders: string[];
-  years: number[];
+  years: string[];
   collectionNames: string[];
   dataMap: Record<string, House>;
 

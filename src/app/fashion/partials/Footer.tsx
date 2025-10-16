@@ -19,7 +19,7 @@ interface House {
 type FooterProps = {
   seasons: string[];
   genders: string[];
-  years: number[];
+  years: string[];
   collectionNames: string[];
   dataMap: Record<string, House>;
 

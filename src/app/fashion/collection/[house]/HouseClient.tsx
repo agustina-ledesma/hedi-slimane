@@ -41,6 +41,7 @@ export default function HousePage() {
     searchParams.get("gender") || ""
   );
   const [yearFilter, setYearFilter] = useState(searchParams.get("year") || "");
+
   const [collectionFilter, setCollectionFilter] = useState(
     searchParams.get("collection") || ""
   );
@@ -60,36 +61,6 @@ export default function HousePage() {
       setCollectionFilter("");
     }
   }, [seasonFilter, genderFilter, yearFilter]);
-
-  // 🔹 Fetch de la casa y actualización de la URL
-  /*  useEffect(() => {
-    if (!houseParam) return;
-
-    const query = new URLSearchParams();
-    if (seasonFilter) query.set("season", seasonFilter);
-    if (genderFilter) query.set("gender", genderFilter);
-    if (yearFilter) query.set("year", yearFilter);
-    if (collectionFilter) query.set("collection", collectionFilter);
-
-    router.replace(`/fashion/collection/${houseParam}?${query.toString()}`);
-
-    const fetchHouse = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch(`/api/houses/${houseParam}?${query.toString()}`);
-        if (!res.ok) throw new Error("House not found");
-        const data = await res.json();
-        setHouse(data);
-      } catch (err) {
-        console.error(err);
-        setHouse(null);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchHouse();
-  }, [houseParam, seasonFilter, genderFilter, yearFilter, collectionFilter]); */
 
   useEffect(() => {
     if (!houseParam) return;
@@ -140,9 +111,14 @@ export default function HousePage() {
   const genders = Array.from(
     new Set(house.allCollections.map((c) => c.gender))
   );
-  const years = Array.from(
+  /*  const years = Array.from(
     new Set(house.allCollections.map((c) => c.year.toString()))
+  ); */
+
+  const years = Array.from(
+    new Set(house.allCollections.map((c) => String(c.year)))
   );
+
   const collectionNames = Array.from(
     new Set(house.allCollections.map((c) => c.name).filter(Boolean))
   );
