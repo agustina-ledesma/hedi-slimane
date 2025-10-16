@@ -13,13 +13,11 @@ import Link from "next/link";
 import { IconChevronDown } from "@tabler/icons-react";
 
 export default function Nav() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const [open, setOpen] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const menuItems = ["THE ICON", "FASHION GALLERY", "BOOKS"];
 
   /*  const links = [
     {

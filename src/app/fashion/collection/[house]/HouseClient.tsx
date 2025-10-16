@@ -25,9 +25,17 @@ interface House {
   allCollections: Collection[];
 }
 
-export default function HousePage() {
-  const params = useParams();
-  const houseParam = (params?.house as string)?.toLowerCase();
+interface HouseClientProps {
+  params: { house: string };
+  dataMap?: Record<string, HouseMapItem>;
+}
+
+export default function  HouseClient({ params, dataMap }: HouseClientProps) {
+  
+  const houseParam = params.house.toLowerCase();
+  //const params = useParams();
+
+  //const houseParam = (params?.house as string)?.toLowerCase();
   const searchParams = useSearchParams();
   const router = useRouter();
   const [house, setHouse] = useState<House | null>(null);
