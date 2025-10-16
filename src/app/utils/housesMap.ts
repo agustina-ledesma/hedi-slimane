@@ -1,13 +1,22 @@
-import apiData from "@/data/api.json"; // o de donde tengas tu info inicial
+import apiData from "@/data/api.json";
 
 function normalizeName(name: string) {
   return name.toLowerCase().replace(/\s+/g, "-");
 }
 
-// Generamos un array de objetos con slug, nombre y cover
-export const housesMap = apiData.houses.map((house) => ({
-  slug: normalizeName(house.name),
-  name: house.name, // ya viene de la API
-  cover: house.cover, // ya viene de la API
-  year: house.year, // ya viene de la API
-}));
+export interface HouseMapItem {
+  slug: string;
+  name: string;
+  cover: string;
+  year: string;
+}
+
+// 🔹 Aseguramos que siempre sea un array
+export const housesMap: HouseMapItem[] = Array.isArray(apiData.houses)
+  ? apiData.houses.map((house) => ({
+      slug: normalizeName(house.name),
+      name: house.name,
+      cover: house.cover,
+      year: house.year,
+    }))
+  : [];

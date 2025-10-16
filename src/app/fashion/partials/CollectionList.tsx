@@ -3,11 +3,11 @@ import Image from "next/image";
 
 interface Collection {
   id: number;
-  name: string;
+  name: string | null;
   season: string;
   year: number;
   gender: string;
-  coverImage: string;
+  cover: string;
   images: string[];
 }
 

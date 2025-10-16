@@ -21,7 +21,7 @@ export default function Nav() {
 
   const menuItems = ["THE ICON", "FASHION GALLERY", "BOOKS"];
 
- /*  const links = [
+  /*  const links = [
     {
       title: "Yves Saint Laurent",
       link: "yves-saint-laurent",
@@ -137,12 +137,11 @@ export default function Nav() {
                         ALL HOUSES
                       </Link>
                     </li>
-                    {housesMap.map((item, index) => (
+                    {Object.values(housesMap).map((item, index) => (
                       <li key={index}>
                         <Link
                           href={`/fashion/collection/${item.slug}`}
                           className="block py-2 px-3 uppercase"
-                          onClick={() => setIsOpen(false)}
                         >
                           {item.name}
                         </Link>
@@ -199,7 +198,7 @@ export default function Nav() {
                           ALL HOUSES
                         </Link>
                       </DropdownItem>
-                      {housesMap.map((item, index) => (
+                      {Object.values(housesMap).map((item, index) => (
                         <DropdownItem key={index} textValue={item.name}>
                           <Link
                             href={`/fashion/collection/${item.slug}`}

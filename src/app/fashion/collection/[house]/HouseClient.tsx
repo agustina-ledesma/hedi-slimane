@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams, useRouter } from "next/navigation";
-import { housesMap } from "@/utils/housesMap";
+import { HouseMapItem, housesMap } from "@/utils/housesMap";
 import CollectionFilters from "@/fashion/partials/CollectionFilters";
 import CollectionsList from "@/fashion/partials/CollectionList";
 import Tags from "@/fashion/partials/Tags";
@@ -12,6 +12,7 @@ import CollectionsSkeleton from "./CollectionSkeleton";
 interface Collection {
   id: number;
   name: string | null;
+  cover: string;
   season: string;
   year: number;
   gender: string;
@@ -29,7 +30,6 @@ export default function HousePage() {
   const houseParam = (params?.house as string)?.toLowerCase();
   const searchParams = useSearchParams();
   const router = useRouter();
-
   const [house, setHouse] = useState<House | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -45,6 +45,11 @@ export default function HousePage() {
   const [collectionFilter, setCollectionFilter] = useState(
     searchParams.get("collection") || ""
   );
+
+  const housesMapObject: Record<string, HouseMapItem> = {};
+  housesMap.forEach((house) => {
+    housesMapObject[house.slug] = house;
+  });
 
   // 🔹 Limpiar filtros combinables si seleccionás una colección
   useEffect(() => {
@@ -111,18 +116,16 @@ export default function HousePage() {
   const genders = Array.from(
     new Set(house.allCollections.map((c) => c.gender))
   );
-  /*  const years = Array.from(
-    new Set(house.allCollections.map((c) => c.year.toString()))
-  ); */
-
   const years = Array.from(
     new Set(house.allCollections.map((c) => String(c.year)))
   );
-
-  const collectionNames = Array.from(
-    new Set(house.allCollections.map((c) => c.name).filter(Boolean))
+  const collectionNames: string[] = Array.from(
+    new Set(
+      house.allCollections
+        .map((c) => c.name)
+        .filter((name): name is string => name !== null && name !== "")
+    )
   );
-
   const hasCollectionNames = house.allCollections.some((c) => c.name !== null);
 
   return (
@@ -150,17 +153,17 @@ export default function HousePage() {
         setYearFilter={setYearFilter}
         setCollectionFilter={setCollectionFilter}
         hasCollectionNames={hasCollectionNames}
-        dataMap={housesMap}
+        dataMap={housesMapObject}
       />
 
-      <Tags dataMap={housesMap} />
+      <Tags dataMap={housesMapObject} />
 
       <div className="relative">
         <CollectionsList collections={house.collections} house={house.name} />
       </div>
 
       <Footer
-        dataMap={housesMap}
+        dataMap={housesMapObject}
         seasons={seasons}
         genders={genders}
         years={years}

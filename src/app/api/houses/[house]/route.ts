@@ -9,9 +9,8 @@ export async function GET(
   req: Request,
   { params }: { params: Promise<{ house: string }> }
 ): Promise<Response> {
-  const { house } = await params; // ⬅️ Cambio clave en Next 15
+  const { house } = await params; 
 
-  // Buscar la casa
   const foundHouse = apiData.houses.find(
     (h) => normalizeName(h.name) === normalizeName(house)
   );
@@ -26,7 +25,6 @@ export async function GET(
   const season = url.searchParams.get("season");
   const gender = url.searchParams.get("gender");
 
-  // 🟩 Aquí el cambio importante
   let filteredCollections: {
     id: number;
     folder: string;
