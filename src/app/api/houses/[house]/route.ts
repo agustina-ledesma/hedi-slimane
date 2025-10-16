@@ -26,24 +26,17 @@ export async function GET(
   const season = url.searchParams.get("season");
   const gender = url.searchParams.get("gender");
 
-  let filteredCollections: typeof foundHouse.collections = [];
-
-  /*  if (collectionName) {
-    // Si hay collectionName, solo traer esa colección
-    filteredCollections = foundHouse.collections.filter(
-      (c) => c.name && normalizeName(c.name) === normalizeName(collectionName)
-    );
-  } else {
-
-   filteredCollections = foundHouse.collections.filter((c) => {
-      let match = true;
-      if (year) match = match && c.year.toString() === year;
-      if (season) match = match && c.season.toLowerCase() === season.toLowerCase();
-      if (gender) match = match && c.gender.toLowerCase() === gender.toLowerCase();
-      return match;
-    });
-  }
- */
+  // 🟩 Aquí el cambio importante
+  let filteredCollections: {
+    id: number;
+    folder: string;
+    name: string | null;
+    season: string;
+    year: number;
+    gender: string;
+    coverImage: string;
+    images: string[];
+  }[] = [];
 
   if (collectionName) {
     filteredCollections = foundHouse.collections.filter((c) => {
