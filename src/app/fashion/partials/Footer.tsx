@@ -112,7 +112,7 @@ export default function Footer({
           </>
 
           <DropdownItem key="season" textValue="season">
-            <div className="flex sm:flex-row items-center gap-4 p-1 sm:flex-1">
+            <div className="flex sm:flex-row items-center gap-4  sm:flex-1">
               <span className="shrink-0 font-semibold">Season:</span>
               <select
                 value={seasonFilter}
@@ -130,7 +130,7 @@ export default function Footer({
           </DropdownItem>
 
           <DropdownItem key="year" textValue="year">
-            <div className="flex sm:flex-row items-center gap-4 p-1 sm:flex-1">
+            <div className="flex sm:flex-row items-center gap-4 sm:flex-1">
               <span className="shrink-0 font-semibold">Year:</span>
               <select
                 value={yearFilter}
@@ -148,7 +148,7 @@ export default function Footer({
           </DropdownItem>
 
           <DropdownItem key="gender" textValue="gender">
-            <div className="flex sm:flex-row sm:items-center gap-4 p-1 sm:flex-1">
+            <div className="flex sm:flex-row sm:items-center gap-4  sm:flex-1">
               <span className="shrink-0 font-semibold">Gender:</span>
               <select
                 value={genderFilter}

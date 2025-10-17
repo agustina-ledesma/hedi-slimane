@@ -19,12 +19,12 @@ export async function generateMetadata({
   };
 }
 
-// 🔹 El componente de página también debe esperar los params
+
 export default async function HousePage({
   params,
 }: {
   params: Promise<{ house: string }>;
 }) {
-  const resolvedParams = await params; // 👈 importante
+  const resolvedParams = await params; 
   return <HouseClient params={resolvedParams} />;
 }

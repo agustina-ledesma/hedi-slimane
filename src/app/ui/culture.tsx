@@ -15,7 +15,7 @@ export default function Culture() {
             style={{ width: "300px", height: "auto" }}
           />
           <div className="w-full ps-8 my-5 flex flex-col justify-end">
-            <p className=" text-3xl lg:text-4xl text-end italic leading-[1.4] font-semibold">
+            <p className=" text-3xl lg:text-4xl text-end italic font-semibold">
               “I had to go on a diet just to fit into Hedi’s jeans.”
             </p>
             <span className="flex justify-end mt-10">| Karl Lagerfeld </span>

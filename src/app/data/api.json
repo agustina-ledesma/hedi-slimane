@@ -3,6 +3,7 @@
     {
       "slug": "Yves",
       "name": "Yves Saint Laurent",
+      "shortName": "YSL",
       "cover": "/images/houses/1.jpg",
       "year": "1999",
       "collections": [
@@ -134,6 +135,7 @@
     {
       "slug": "Dior",
       "name": "Dior Homme",
+      "shortName": "Dior",
       "cover": "/images/houses/2.jpg",
       "year": "2001 - 2007",
       "collections": [
@@ -145,7 +147,7 @@
           "year": 2001,
           "gender": "Menswear",
           "coverImage": "https://res.cloudinary.com/de4crdqzl/image/upload/v1760197429/1_aevdch.png",
-         "images": [
+          "images": [
             "https://res.cloudinary.com/de4crdqzl/image/upload/v1760197429/1_aevdch.png",
             "https://res.cloudinary.com/de4crdqzl/image/upload/v1760197429/2_ogpih0.png",
             "https://res.cloudinary.com/de4crdqzl/image/upload/v1760197429/3_euovnf.png",
@@ -676,6 +678,7 @@
     {
       "slug": "saint-laurent",
       "name": "Saint Laurent",
+      "shortName": "Saint Laurent",
       "cover": "/images/houses/3.jpg",
       "year": "2013 - 2017",
       "collections": [
@@ -1336,6 +1339,7 @@
     {
       "slug": "celine",
       "name": "Celine",
+      "shortName": "Celine",
       "cover": "/images/houses/4.jpg",
       "year": "2019 - 2025",
       "collections": [

@@ -14,11 +14,13 @@ interface Collection {
 interface CollectionsListProps {
   collections: Collection[];
   house: string;
+  shortName: string;
 }
 
 export default function CollectionsList({
   collections,
   house,
+  shortName
 }: CollectionsListProps) {
   const allImages = collections.flatMap((collection) =>
     collection.images.map((img) => ({
@@ -34,7 +36,7 @@ export default function CollectionsList({
   if (allImages.length === 0) {
     return (
       <div className="h-screen flex justify-center items-center">
-        <h2 className="py-3 text-md uppercase text-secondary-800">
+        <h2 className="py-3 text-md uppercase text-secondary-500">
           NO RESULTS.
         </h2>
       </div>
@@ -58,15 +60,19 @@ export default function CollectionsList({
               priority
             />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-1">
             <div className="flex justify-between items-center text-sm pt-2">
-              <span>{house}</span>
+              <span className="font-semibold italic truncate block max-w-[120px] sm:max-w-none">
+                { shortName || house}
+              </span>
+
               <span>{item.year}</span>
             </div>
-            <div className="flex flex-col gap-2 md:flex-row md:justify-between md:items-start text-sm">
-              <span className="font-semibold italic">
-                {item.name || `${item.gender} - ${item.year}`}
+            <div className="flex flex-row justify-between md:items-start text-sm">
+              <span className="font-semibold italic truncate block max-w-[100px] sm:max-w-none">
+                {item.name || `${item.gender}`}
               </span>
+
               <span>
                 {item.season === "Fall/Winter"
                   ? "F/W"

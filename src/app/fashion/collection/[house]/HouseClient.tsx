@@ -21,6 +21,7 @@ interface Collection {
 
 interface House {
   name: string;
+  shortName: string;
   collections: Collection[];
   allCollections: Collection[];
 }
@@ -30,8 +31,7 @@ interface HouseClientProps {
   dataMap?: Record<string, HouseMapItem>;
 }
 
-export default function  HouseClient({ params, dataMap }: HouseClientProps) {
-  
+export default function HouseClient({ params, dataMap }: HouseClientProps) {
   const houseParam = params.house.toLowerCase();
   //const params = useParams();
 
@@ -95,6 +95,7 @@ export default function  HouseClient({ params, dataMap }: HouseClientProps) {
         if (!res.ok) throw new Error("House not found");
         const data = await res.json();
         setHouse(data);
+    
       } catch (err) {
         console.error(err);
         setHouse(null);
@@ -137,55 +138,57 @@ export default function  HouseClient({ params, dataMap }: HouseClientProps) {
   const hasCollectionNames = house.allCollections.some((c) => c.name !== null);
 
   return (
-    <div className="p-4 md:p-6">
-      <h1 className="uppercase text-2xl md:text-4xl lg:text-5xl font-semibold py-3 lg:py-6">
-        <span>{house.name} - </span>
-        {collectionFilter
-          ? collectionFilter
-          : yearFilter
-          ? yearFilter
-          : "all collections"}
-      </h1>
+    <>
+      <div className="p-3 md:p-6">
+        <h1 className="uppercase text-2xl md:text-4xl lg:text-5xl font-semibold py-3 lg:py-6">
+          <span>{house.name} - </span>
+          {collectionFilter
+            ? collectionFilter
+            : yearFilter
+            ? yearFilter
+            : "all collections"}
+        </h1>
 
-      <CollectionFilters
-        seasons={seasons}
-        genders={genders}
-        years={years}
-        collectionNames={collectionNames}
-        seasonFilter={seasonFilter}
-        genderFilter={genderFilter}
-        yearFilter={yearFilter}
-        collectionFilter={collectionFilter}
-        setSeasonFilter={setSeasonFilter}
-        setGenderFilter={setGenderFilter}
-        setYearFilter={setYearFilter}
-        setCollectionFilter={setCollectionFilter}
-        hasCollectionNames={hasCollectionNames}
-        dataMap={housesMapObject}
-      />
+        <CollectionFilters
+          seasons={seasons}
+          genders={genders}
+          years={years}
+          collectionNames={collectionNames}
+          seasonFilter={seasonFilter}
+          genderFilter={genderFilter}
+          yearFilter={yearFilter}
+          collectionFilter={collectionFilter}
+          setSeasonFilter={setSeasonFilter}
+          setGenderFilter={setGenderFilter}
+          setYearFilter={setYearFilter}
+          setCollectionFilter={setCollectionFilter}
+          hasCollectionNames={hasCollectionNames}
+          dataMap={housesMapObject}
+        />
 
-      <Tags dataMap={housesMapObject} />
+        <Tags dataMap={housesMapObject} />
 
-      <div className="relative">
-        <CollectionsList collections={house.collections} house={house.name} />
+        <div className="relative">
+          <CollectionsList collections={house.collections} house={house.name} shortName={house.shortName} />
+        </div>
+
+        <Footer
+          dataMap={housesMapObject}
+          seasons={seasons}
+          genders={genders}
+          years={years}
+          collectionNames={collectionNames}
+          seasonFilter={seasonFilter}
+          genderFilter={genderFilter}
+          yearFilter={yearFilter}
+          collectionFilter={collectionFilter}
+          setSeasonFilter={setSeasonFilter}
+          setGenderFilter={setGenderFilter}
+          setYearFilter={setYearFilter}
+          setCollectionFilter={setCollectionFilter}
+          hasCollectionNames={hasCollectionNames}
+        />
       </div>
-
-      <Footer
-        dataMap={housesMapObject}
-        seasons={seasons}
-        genders={genders}
-        years={years}
-        collectionNames={collectionNames}
-        seasonFilter={seasonFilter}
-        genderFilter={genderFilter}
-        yearFilter={yearFilter}
-        collectionFilter={collectionFilter}
-        setSeasonFilter={setSeasonFilter}
-        setGenderFilter={setGenderFilter}
-        setYearFilter={setYearFilter}
-        setCollectionFilter={setCollectionFilter}
-        hasCollectionNames={hasCollectionNames}
-      />
-    </div>
+    </>
   );
 }

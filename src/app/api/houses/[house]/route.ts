@@ -38,7 +38,7 @@ export async function GET(
 
   if (collectionName) {
     filteredCollections = foundHouse.collections.filter((c) => {
-      const name = c.name ?? ""; // si es null, lo tratamos como string vacío
+      const name = c.name ?? ""; 
       return normalizeName(name) === normalizeName(collectionName);
     });
   } else {
