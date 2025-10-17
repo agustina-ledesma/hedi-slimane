@@ -17,7 +17,7 @@ export default function Tags({ dataMap }: TagsProps) {
   const router = useRouter();
 
   return (
-    <div className="md:hidden sticky top-0 py-3 bg-white z-30">
+    <div className="md:hidden sticky top-14 py-3 bg-white z-30">
       <div className="flex gap-2 overflow-x-auto flex-nowrap scrollbar-none no-scrollbar">
         {Object.values(dataMap).map((item: House) => {
           const isActive = item.slug === currentSlug;

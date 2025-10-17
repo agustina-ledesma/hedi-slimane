@@ -140,7 +140,7 @@ export default function HouseClient({ params, dataMap }: HouseClientProps) {
   return (
     <>
       <div className="p-3 md:p-6">
-        <h1 className="uppercase text-2xl md:text-4xl lg:text-5xl font-semibold py-3 lg:py-6">
+        <h1 className="uppercase text-3xl md:text-4xl lg:text-5xl font-semibold py-3 lg:py-6">
           <span>{house.name} - </span>
           {collectionFilter
             ? collectionFilter

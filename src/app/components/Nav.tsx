@@ -13,34 +13,18 @@ import Link from "next/link";
 import { IconChevronDown } from "@tabler/icons-react";
 
 export default function Nav() {
-
   const [open, setOpen] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
 
-
-  /*  const links = [
-    {
-      title: "Yves Saint Laurent",
-      link: "yves-saint-laurent",
-    },
-    {
-      title: "Dior Homme",
-      link: "dior",
-    },
-    {
-      title: "Saint Laurent",
-      link: "saint-laurent",
-    },
-    {
-      title: "Celine",
-      link: "celine",
-    },
-  ]; */
+  const handleMobileLinkClick = () => {
+    setOpen(false); // cierra el menú móvil
+    setIsOpen(false); // cierra el dropdown interno
+  };
 
   return (
     <>
-      <nav className="w-full relative z-40 border-b-1 border-black text-sm">
+      <nav className="w-full relative sticky top-0 bg-white z-40 border-b-1 border-black text-sm">
         {/* ===== MOBILE HEADER: toggle (left) + centered logo ===== */}
         <div className="sm:hidden relative w-full h-14 flex items-center">
           {/* Toggle (left) */}
@@ -98,13 +82,16 @@ export default function Nav() {
           <nav className="sm:hidden bg-white border-t flex justify-start shadow-md w-full z-20">
             <ul className="flex flex-col p-4 gap-2 text-left w-full">
               <li>
-                <Link href="/" className="block py-2 px-3">
+                <Link
+                  href="/"
+                  className="block py-2 px-3"
+                  onClick={handleMobileLinkClick}
+                >
                   THE ICON
                 </Link>
               </li>
 
-              {/* Dropdown dentro del flujo */}
-              <li className="w-full">
+              <li>
                 <button
                   onClick={() => setIsOpen((prev) => !prev)}
                   className="flex items-center justify-between uppercase bg-transparent px-3 py-2 w-full text-left"
@@ -119,7 +106,6 @@ export default function Nav() {
                   />
                 </button>
 
-                {/* Submenú dentro del flujo */}
                 <div
                   className={`overflow-hidden transition-all duration-300 ${
                     isOpen ? "max-h-96" : "max-h-0"
@@ -130,7 +116,7 @@ export default function Nav() {
                       <Link
                         href="/fashion"
                         className="block py-2 px-3 uppercase"
-                        onClick={() => setIsOpen(false)}
+                        onClick={handleMobileLinkClick} // aquí también cerramos menú
                       >
                         ALL HOUSES
                       </Link>
@@ -140,6 +126,7 @@ export default function Nav() {
                         <Link
                           href={`/fashion/collection/${item.slug}`}
                           className="block py-2 px-3 uppercase"
+                          onClick={handleMobileLinkClick} // importante
                         >
                           {item.name}
                         </Link>
@@ -150,7 +137,11 @@ export default function Nav() {
               </li>
 
               <li>
-                <Link href="/#books" className="block py-2 px-3">
+                <Link
+                  href="/#books"
+                  className="block py-2 px-3"
+                  onClick={handleMobileLinkClick}
+                >
                   BOOKS
                 </Link>
               </li>

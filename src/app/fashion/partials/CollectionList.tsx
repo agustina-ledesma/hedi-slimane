@@ -20,7 +20,7 @@ interface CollectionsListProps {
 export default function CollectionsList({
   collections,
   house,
-  shortName
+  shortName,
 }: CollectionsListProps) {
   const allImages = collections.flatMap((collection) =>
     collection.images.map((img) => ({
@@ -48,29 +48,29 @@ export default function CollectionsList({
       {allImages.map((item, idx) => (
         <div
           key={`${item.id}-${idx}`}
-          className="w-full border border-neutral-100 p-3 min-w-[120px] h-auto max-w-[270px] flex flex-col"
+          className="w-full border border-neutral-100  p-3 min-w-[120px] max-w-[270px] h-fit flex flex-col"
         >
-          <div className="relative min-w-[120px] w-full max-w-[270px] max-h-[350px]">
+          <div className="w-full h-[200px] sm:h-[350px] relative">
             <Image
-              width={270}
-              height={350}
-              src={`${item.img}`}
+              src={item.img}
               alt={item.name || `${house} - ${item.year}`}
-              className="object-cover w-full max-w-[270px] h-auto max-h-[350px]"
+              fill
+              style={{ objectFit: "cover" }}
               priority
             />
           </div>
-          <div className="flex flex-col gap-1">
-            <div className="flex justify-between items-center text-sm pt-2">
-              <span className="font-semibold italic truncate block max-w-[120px] sm:max-w-none">
-                { shortName || house}
-              </span>
 
+          <div className="flex flex-col gap-1 mt-2">
+            <div className="flex justify-between items-center text-sm">
+              <span className="font-semibold italic block max-w-[150px] truncate">
+                {shortName || house}
+              </span>
               <span>{item.year}</span>
             </div>
+
             <div className="flex flex-row justify-between md:items-start text-sm">
               <span className="font-semibold italic truncate block max-w-[100px] sm:max-w-none">
-                {item.name || `${item.gender}`}
+                {item.name || item.gender}
               </span>
 
               <span>

@@ -13,7 +13,7 @@ export default function Hero() {
 
         {/* Imagen (tamaño fijo y centrado) */}
         <div className="flex flex-col gap-3 pb-2 w-full">
-          <div className="mx-auto">
+          {/* <div className="mx-auto">
             {" "}
             <Image
               src={"/images/hedi-slimane/hedi-home.png"}
@@ -22,11 +22,24 @@ export default function Hero() {
               height={500}
               priority
             />{" "}
+          </div> */}
+          <div className="w-full relative">
+            {/* Contenedor con altura dinámica según el breakpoint */}
+            <div className="w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px]  relative">
+              <Image
+                src="/images/hedi-slimane/hedi-home.png"
+                alt="Hedi Slimane"
+                fill
+                style={{ objectFit: "cover" }}
+                priority
+              />
+            </div>
           </div>
+
           <div className="flex lg:justify-end py-2 mb-3">
-            <p className="leading-[1.75] uppercase text-md  lg:text-lg lg:text-right max-w-3xl">
-              French designer and photographer — Hedi Slimane fuses rock attitude
-              with refined minimalism, redefining the essence of modern
+            <p className="leading-[1.75] uppercase text-sm  lg:text-lg lg:text-right max-w-3xl">
+              French designer and photographer — Hedi Slimane fuses rock
+              attitude with refined minimalism, redefining the essence of modern
               elegance.
             </p>
           </div>

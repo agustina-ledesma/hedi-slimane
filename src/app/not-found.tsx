@@ -14,5 +14,6 @@ export default function NotFound() {
         Back to Home
       </Link>
     </main>
+   
   );
 }
