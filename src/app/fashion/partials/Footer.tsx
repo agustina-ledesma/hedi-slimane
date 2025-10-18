@@ -9,6 +9,7 @@ import {
   DropdownItem,
   Button,
 } from "@heroui/react";
+import { Select, SelectItem, SelectSection } from "@heroui/react";
 
 interface House {
   slug: string;
@@ -75,37 +76,49 @@ export default function Footer({
         <DropdownMenu aria-label="Filters" variant="flat" closeOnSelect={false}>
           <DropdownItem key="houses" textValue="houses">
             <div className="flex items-center gap-3 flex-1">
-              <span className="shrink-0 font-semibold">House:</span>
-              <select
-                value={currentHouse}
-                onChange={handleHouseChange}
-                className="p-2 w-full sm:w-auto flex-1"
+              <Select
+                label="House:"
+                size="lg"
+                variant="underlined"
+                selectedKeys={[currentHouse]}
+                onSelectionChange={(keys) => {
+                  const keySet = keys as Set<string>;
+                  const value = keySet.values().next().value || "";
+                  if (value && value !== currentHouse) {
+                    router.push(`/fashion/collection/${value}`);
+                  }
+                }}
               >
                 {Object.values(dataMap).map((house: House) => (
-                  <option key={house.slug} value={house.slug}>
-                    {house.name}
-                  </option>
+                  <SelectItem key={house.slug}>{house.name}</SelectItem>
                 ))}
-              </select>
+              </Select>
             </div>
           </DropdownItem>
           <>
             {hasCollectionNames && (
               <DropdownItem key="collections" textValue="collections">
                 <div className="flex items-center gap-3 flex-1">
-                  <span className="shrink-0 font-semibold">Collection:</span>
-                  <select
-                    value={collectionFilter}
-                    onChange={(e) => setCollectionFilter(e.target.value)}
-                    className="p-2 w-full sm:w-auto flex-1"
+                  <Select
+                    label="Collection:"
+                    variant="underlined"
+                    size="lg"
+                    selectedKeys={
+                      collectionFilter ? [collectionFilter] : ["all"]
+                    }
+                    onSelectionChange={(keys) => {
+                      const keySet = keys as Set<string>;
+                      const value = keySet.values().next().value || "all";
+                      setCollectionFilter(value === "all" ? "" : value);
+                    }}
                   >
-                    <option value="">All Collections</option>
-                    {collectionNames.map((name) => (
-                      <option key={name} value={name}>
-                        {name}
-                      </option>
-                    ))}
-                  </select>
+                    <SelectItem key="all">All Collections</SelectItem>
+                    <SelectSection>
+                      {collectionNames.map((name) => (
+                        <SelectItem key={name}>{name}</SelectItem>
+                      ))}
+                    </SelectSection>
+                  </Select>
                 </div>
               </DropdownItem>
             )}
@@ -113,55 +126,70 @@ export default function Footer({
 
           <DropdownItem key="season" textValue="season">
             <div className="flex sm:flex-row items-center gap-4  sm:flex-1">
-              <span className="shrink-0 font-semibold">Season:</span>
-              <select
-                value={seasonFilter}
-                onChange={(e) => setSeasonFilter(e.target.value)}
-                className="p-2 w-full sm:w-auto flex-1"
+              <Select
+                label="Season:"
+                variant="underlined"
+                size="lg"
+                selectedKeys={seasonFilter ? [seasonFilter] : ["all"]}
+                onSelectionChange={(keys) => {
+                  const keySet = keys as Set<string>;
+                  const value = keySet.values().next().value || "all";
+                  setSeasonFilter(value === "all" ? "" : value);
+                }}
               >
-                <option value="">All Seasons</option>
-                {seasons.map((season) => (
-                  <option key={season} value={season}>
-                    {season}
-                  </option>
-                ))}
-              </select>
+                <SelectItem key="all">All Seasons</SelectItem>
+                <SelectSection>
+                  {seasons.map((season) => (
+                    <SelectItem key={season}>{season}</SelectItem>
+                  ))}
+                </SelectSection>
+              </Select>
             </div>
           </DropdownItem>
 
           <DropdownItem key="year" textValue="year">
             <div className="flex sm:flex-row items-center gap-4 sm:flex-1">
-              <span className="shrink-0 font-semibold">Year:</span>
-              <select
-                value={yearFilter}
-                onChange={(e) => setYearFilter(e.target.value)}
-                className="p-2 w-full sm:w-auto flex-1"
+              <Select
+                label="Year:"
+                variant="underlined"
+                size="lg"
+                selectedKeys={yearFilter ? [yearFilter] : ["all"]}
+                onSelectionChange={(keys) => {
+                  const keySet = keys as Set<string>;
+                  const value = keySet.values().next().value || "all";
+                  setYearFilter(value === "all" ? "" : value);
+                }}
               >
-                <option value="">All Years</option>
-                {years.map((year) => (
-                  <option key={year} value={year}>
-                    {year}
-                  </option>
-                ))}
-              </select>
+                <SelectItem key="all">All Years</SelectItem>
+                <SelectSection>
+                  {years.map((year) => (
+                    <SelectItem key={year}>{year}</SelectItem>
+                  ))}
+                </SelectSection>
+              </Select>
             </div>
           </DropdownItem>
 
           <DropdownItem key="gender" textValue="gender">
             <div className="flex sm:flex-row sm:items-center gap-4  sm:flex-1">
-              <span className="shrink-0 font-semibold">Gender:</span>
-              <select
-                value={genderFilter}
-                onChange={(e) => setGenderFilter(e.target.value)}
-                className="p-2 w-full sm:w-auto flex-1"
+              <Select
+                label="Gender:"
+                variant="underlined"
+                size="lg"
+                selectedKeys={genderFilter ? [genderFilter] : ["all"]}
+                onSelectionChange={(keys) => {
+                  const keySet = keys as Set<string>;
+                  const value = keySet.values().next().value || "all";
+                  setGenderFilter(value === "all" ? "" : value);
+                }}
               >
-                <option value="">All Genders</option>
-                {genders.map((gender) => (
-                  <option key={gender} value={gender}>
-                    {gender}
-                  </option>
-                ))}
-              </select>
+                <SelectItem key="all">All Genders</SelectItem>
+                <SelectSection>
+                  {genders.map((gender) => (
+                    <SelectItem key={gender}>{gender}</SelectItem>
+                  ))}
+                </SelectSection>
+              </Select>
             </div>
           </DropdownItem>
         </DropdownMenu>

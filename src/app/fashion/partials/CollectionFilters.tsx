@@ -1,10 +1,10 @@
 "use client";
 import { useRouter, usePathname } from "next/navigation";
+import { Select, SelectItem, SelectSection } from "@heroui/react";
 
 interface House {
   slug: string;
   name: string;
-  // otros campos si los necesitás
 }
 
 interface CollectionFiltersProps {
@@ -55,94 +55,145 @@ export default function CollectionFilters({
   };
 
   return (
-    <div className="hidden md:block flex flex-col gap-3 lg:text-lg max-w-4xl">
+    <div className="hidden md:block flex flex-col gap-6 lg:text-lg max-w-4xl">
       <div className="flex flex-col sm:flex-row sm:items-center sm:gap-6">
-        <div className="flex items-center gap-3 flex-1">
-          <span className="shrink-0 font-semibold">House:</span>
-          <select
-            value={currentHouse}
-            onChange={handleHouseChange}
-            className="p-2 w-full sm:w-auto flex-1"
+        <div className="flex items-center gap-3 flex-1 py-3">
+          <Select
+            label="House:"
+            size="lg"
+            variant="underlined"
+            labelPlacement="outside-left"
+            selectedKeys={[currentHouse]}
+            onSelectionChange={(keys) => {
+              const keySet = keys as Set<string>;
+              const value = keySet.values().next().value || "";
+              if (value && value !== currentHouse) {
+                router.push(`/fashion/collection/${value}`);
+              }
+            }}
+            classNames={{
+              label: "text-lg font-semibold pe-3",
+              listbox: "text-lg",
+            }}
           >
             {Object.values(dataMap).map((house: House) => (
-              <option key={house.slug} value={house.slug}>
-                {house.name}
-              </option>
+              <SelectItem key={house.slug}>{house.name}</SelectItem>
             ))}
-          </select>
+          </Select>
         </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row sm:items-center sm:gap-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:gap-6 py-3">
         {/* Collection */}
         {hasCollectionNames && (
           <div className="flex items-center gap-3 flex-1">
-            <span className="shrink-0 font-semibold">Collection:</span>
-            <select
-              value={collectionFilter}
-              onChange={(e) => setCollectionFilter(e.target.value)}
-              className="p-2 w-full sm:w-auto flex-1"
+            <Select
+              label="Collection:"
+              variant="underlined"
+              labelPlacement="outside-left"
+              selectedKeys={collectionFilter ? [collectionFilter] : ["all"]}
+              onSelectionChange={(keys) => {
+                const keySet = keys as Set<string>;
+                const value = keySet.values().next().value || "all";
+                setCollectionFilter(value === "all" ? "" : value);
+              }}
+              classNames={{
+                label: "text-lg font-semibold pe-3",
+                listbox: "text-lg",
+              }}
             >
-              <option value="">All Collections</option>
-              {collectionNames.map((name) => (
-                <option key={name} value={name}>
-                  {name}
-                </option>
-              ))}
-            </select>
+              <SelectItem key="all">All Collections</SelectItem>
+              <SelectSection>
+                {collectionNames.map((name) => (
+                  <SelectItem key={name}>{name}</SelectItem>
+                ))}
+              </SelectSection>
+            </Select>
           </div>
         )}
 
         {/* Season */}
         <div className="flex items-center gap-3 flex-1">
-          <span className="shrink-0 font-semibold">Season:</span>
-          <select
-            value={seasonFilter}
-            onChange={(e) => setSeasonFilter(e.target.value)}
-            className="p-2 w-full sm:w-auto flex-1"
+          <Select
+            label="Season:"
+            variant="underlined"
+            labelPlacement="outside-left"
+            selectedKeys={seasonFilter ? [seasonFilter] : ["all"]}
+            onSelectionChange={(keys) => {
+              const keySet = keys as Set<string>;
+              const value = keySet.values().next().value || "all";
+              setSeasonFilter(value === "all" ? "" : value);
+            }}
+            classNames={{
+              label: "text-lg font-semibold pe-3",
+              listbox: "text-lg",
+            }}
           >
-            <option value="">All Seasons</option>
-            {seasons.map((season) => (
-              <option key={season} value={season}>
-                {season}
-              </option>
-            ))}
-          </select>
+            <SelectItem key="all">All Seasons</SelectItem>
+            <SelectSection>
+              {seasons.map((season) => (
+                <SelectItem key={season}>{season}</SelectItem>
+              ))}
+            </SelectSection>
+          </Select>
         </div>
       </div>
-      <div className="flex flex-col sm:flex-row sm:items-center sm:gap-6">
+
+      <div className="flex flex-col sm:flex-row sm:items-center sm:gap-6 py-3">
         {/* Year */}
         <div className="flex items-center gap-3 flex-1">
-          <span className="shrink-0 font-semibold">Year:</span>
-          <select
-            value={yearFilter}
-            onChange={(e) => setYearFilter(e.target.value)}
-            className="p-2 w-full sm:w-auto flex-1"
+          <Select
+            label="Year:"
+            variant="underlined"
+            labelPlacement="outside-left"
+            selectedKeys={yearFilter ? [yearFilter] : ["all"]}
+            /* onSelectionChange={(keys) => {
+              const value = Array.from(keys)[0];
+              setYearFilter(value === "all" ? "" : value);
+            }} */
+            onSelectionChange={(keys) => {
+              const keySet = keys as Set<string>;
+              const value = keySet.values().next().value || "all";
+              setYearFilter(value === "all" ? "" : value);
+            }}
+            classNames={{
+              label: "text-lg font-semibold pe-3",
+              listbox: "text-lg",
+            }}
           >
-            <option value="">All Years</option>
-            {years.map((year) => (
-              <option key={year} value={year}>
-                {year}
-              </option>
-            ))}
-          </select>
+            <SelectItem key="all">All Years</SelectItem>
+            <SelectSection>
+              {years.map((year) => (
+                <SelectItem key={year}>{year}</SelectItem>
+              ))}
+            </SelectSection>
+          </Select>
         </div>
 
         {/* Gender */}
         <div className="flex items-center gap-3 flex-1">
-          <span className="shrink-0 font-semibold">Gender:</span>
-          <select
-            value={genderFilter}
-            onChange={(e) => setGenderFilter(e.target.value)}
-            className="p-2 w-full sm:w-auto flex-1"
+          <Select
+            label="Gender:"
+            variant="underlined"
+            labelPlacement="outside-left"
+            selectedKeys={genderFilter ? [genderFilter] : ["all"]}
+            onSelectionChange={(keys) => {
+              const keySet = keys as Set<string>;
+              const value = keySet.values().next().value || "all";
+              setGenderFilter(value === "all" ? "" : value);
+            }}
+            classNames={{
+              label: "text-lg font-semibold pe-3",
+              listbox: "text-lg",
+            }}
           >
-            <option value="">All Genders</option>
-            {genders.map((gender) => (
-              <option key={gender} value={gender}>
-                {gender}
-              </option>
-            ))}
-          </select>
+            <SelectItem key="all">All Genders</SelectItem>
+            <SelectSection>
+              {genders.map((gender) => (
+                <SelectItem key={gender}>{gender}</SelectItem>
+              ))}
+            </SelectSection>
+          </Select>
         </div>
       </div>
     </div>

@@ -32,7 +32,9 @@ export default function Fashion() {
               className="object-contain"
               width={300}
               height={300}
-              style={{ width: "300px", height: "auto" }}
+              style={{ width: "300px", height: "300" }}
+              sizes="(max-width: 300px) 100vw, (max-width: 300px) 50vw, 33vw"
+              priority
             />
             <span className="text-sm flex justify-end py-2 text-gray-600">
               | Hedi Slimane
@@ -45,7 +47,7 @@ export default function Fashion() {
             {/* Columna 1 */}
             <div className="w-fit lg:w-1/3 flex flex-col justify-start px-4 md:px-6">
               <div className="lg:mx-0 flex flex-col justify-end max-w-[300px] max-h-[300px]">
-                <div className=" bg-blue-100">
+                <div className="">
                   <Image
                     src="/images/hedi-slimane/hedi-fashion.jpg"
                     alt="Hedi Slimane"
@@ -53,6 +55,8 @@ export default function Fashion() {
                     width={300}
                     height={300}
                     style={{ width: "300px", height: "auto" }}
+                    sizes="(max-width: 300px) 100vw, (max-width: 300px) 50vw, 33vw"
+                    priority
                   />
                 </div>
                 <span className="text-sm flex justify-end py-2 text-gray-600">

@@ -38,7 +38,7 @@ export default function Gallery() {
               alt="Hedi Slimane diary - 2025-02-04 / 7150"
               width={338}
               height={203}
-              style={{ width: "338px", height: "203px" }} // asegura el tamaño exacto
+              style={{ width: "338px", height: "203px" }} 
             />
             <figcaption className="text-sm italic text-gray-600">
               Hedi Slimane diary - 2025-02-04 / 7150

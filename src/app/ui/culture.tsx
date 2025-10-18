@@ -6,13 +6,14 @@ export default function Culture() {
   return (
     <div className="flex flex-col-reverse lg:flex-row gap-6 p-6">
       <div className="lg:w-1/2 p-4">
-        <div className=" mx-auto lg:mx-0 flex flex-col justify-end max-w-[300px]">
+        <div className=" mx-auto lg:mx-0 flex flex-col justify-end max-w-[300px] h-fit">
           <Image
             src="/images/gallery/karl2.png"
             alt="Karl Lagerfeld"
             width={300}
             height={300}
             style={{ width: "300px", height: "auto" }}
+            sizes="(max-width: 300px) 100vw, (max-width: 300px) 50vw, 33vw"
           />
           <div className="w-full ps-8 my-5 flex flex-col justify-end">
             <p className=" text-3xl lg:text-4xl text-end italic font-semibold">
