@@ -48,7 +48,7 @@ export default function Fashion() {
             <div className="w-fit lg:w-1/3 flex flex-col justify-start px-4 md:px-6">
               <div className="lg:mx-0 flex flex-col justify-end max-w-[300px] max-h-[300px]">
                 <div className="">
-                  <Image
+                  {/*  <Image
                     src="/images/hedi-slimane/hedi-fashion.jpg"
                     alt="Hedi Slimane"
                     className="object-contain"
@@ -57,6 +57,11 @@ export default function Fashion() {
                     style={{ width: "300px", height: "auto" }}
                     sizes="(max-width: 300px) 100vw, (max-width: 300px) 50vw, 33vw"
                     priority
+                  /> */}
+                  <img
+                    src="/images/hedi-slimane/hedi-fashion.jpg"
+                    alt="Hedi Slimane"
+                    className="w-[300px] h-auto object-contain"
                   />
                 </div>
                 <span className="text-sm flex justify-end py-2 text-gray-600">

@@ -36,7 +36,7 @@ export default function Houses() {
         {/*   columa 2 */}
         <div>
           <div className="hidden lg:flex justify-center items-center py-10">
-            <div className="flex flex-wrap gap-6 justify-center">
+            <div className="flex flex-wrap gap-10 justify-center">
               {housesMap.slice(0, 4).map((item, idx) => (
                 <Link
                   href={`/fashion/collection/${item.slug}`}
