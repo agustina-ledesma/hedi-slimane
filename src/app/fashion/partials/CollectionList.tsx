@@ -50,7 +50,7 @@ export default function CollectionsList({
           key={`${item.id}-${idx}`}
           className="w-full border border-neutral-100  p-3 min-w-[120px] max-w-[270px] h-fit flex flex-col"
         >
-          <div className="w-full h-[200px] sm:h-[350px] relative">
+          {/*     <div className="w-full h-[200px] sm:h-[350px] relative">
             <Image
               src={item.img}
               alt={item.name || `${house} - ${item.year}`}
@@ -61,6 +61,14 @@ export default function CollectionsList({
               sizes="(max-width: 270px) 100vw, (max-width: 270px) 50vw, 33vw"
             />
             
+          </div> */}
+          <div className="w-full min-h-[220px] sm:h-[350px] overflow-hidden">
+            <img
+              src={item.img}
+              alt={item.name || `${house} - ${item.year}`}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
           </div>
 
           <div className="flex flex-col gap-1 mt-2">
