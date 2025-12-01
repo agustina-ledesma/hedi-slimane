@@ -57,8 +57,10 @@ export default function CollectionsList({
               fill
               style={{ objectFit: "cover" }}
               priority
-               sizes="(max-width: 270px) 100vw, (max-width: 270px) 50vw, 33vw"
+              unoptimized
+              sizes="(max-width: 270px) 100vw, (max-width: 270px) 50vw, 33vw"
             />
+            
           </div>
 
           <div className="flex flex-col gap-1 mt-2">
